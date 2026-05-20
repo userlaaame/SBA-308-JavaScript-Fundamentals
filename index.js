@@ -122,16 +122,32 @@ function getLearnerData(course, ag, submissions) {
     //Foundation: Let's figure out how many objects need to be in a result array based 
     // the amount of off of Learner arrays.
 
+    //array of learner reports
     const result = []
 
     // keep track of learner ids'
     const ids = []
 
     for (let sub of submissions) {
-        ids.push(sub.learner_id);
-    }
+        // checks for the learner id in the array(specifically index)
+        if (ids.includes(sub.learner_id) !== true) {
+            ids.push(sub.learner_id);
+        }
+        //now we can create learner reports
 
-    console.log(ids);
+        //we need a way to check if the number is already in the array
+
+        //2. Create the learner objects, use a for of loop
+        for (let learnerId of ids) {
+            let learnerReport = {
+                id: learnerId
+            }
+            result.push(learnerReport);
+        }
+
+
+        console.log(ids);
+    }//i'm getting multiples printing again....need to fix
 //   const result = [
 //     {
 //       id: 125,
