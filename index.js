@@ -114,29 +114,41 @@ const LearnerSubmissions = [
   }
 ];
 
-// function getLearnerData(course, ag, submissions) {
+function getLearnerData(course, ag, submissions) {
   // here, we would process this data to achieve the desired result.
 
   //Figure out how many learner there are (and how many report objects are needed)
 
+    //Foundation: Let's figure out how many objects need to be in a result array based 
+    // the amount of off of Learner arrays.
 
-  const result = [
-    {
-      id: 125,
-      avg: 0.985, // (47 + 150) / (50 + 150)
-      1: 0.94, // 47 / 50
-      2: 1.0 // 150 / 150
-    },
-    {
-      id: 132,
-      avg: 0.82, // (39 + 125) / (50 + 150)
-      1: 0.78, // 39 / 50
-      2: 0.833 // late: (140 - 15) / 150
+    const result = []
+
+    // keep track of learner ids'
+    const ids = []
+
+    for (let sub of submissions) {
+        ids.push(sub.learner_id);
     }
-  ];
+
+    console.log(ids);
+//   const result = [
+//     {
+//       id: 125,
+//       avg: 0.985, // (47 + 150) / (50 + 150)
+//       1: 0.94, // 47 / 50
+//       2: 1.0 // 150 / 150
+//     },
+//     {
+//       id: 132,
+//       avg: 0.82, // (39 + 125) / (50 + 150)
+//       1: 0.78, // 39 / 50
+//       2: 0.833 // late: (140 - 15) / 150
+//     }
+//   ];
 
   return result;
-// }
+}
 
 const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
 
@@ -148,31 +160,28 @@ console.log(result);
 // should throw an error, letting the user know that the input was invalid. Similar data validation
 // should occur elsewhere within the program.
 
-//Foundation: Let's figure out how many objects need to be in a result array based 
-// the amount of off of Learner arrays.
 
+// //Step 1: Validate the input data
+// function getLearnerData(course, ag, submissions) {
+//   if (ag.course_id !== course.id) {
+//     throw new Error(`AssignmentGroup ${ag.id} does not belong to course ${course.id}`);
+//   }
 
-//Step 1: Validate the input data
-function getLearnerData(course, ag, submissions) {
-  if (ag.course_id !== course.id) {
-    throw new Error(`AssignmentGroup ${ag.id} does not belong to course ${course.id}`);
-  }
+//   //Step 2: Filter to only assignments that are due
+//   const today = new Date();
+//   const dueAssignments = ag.assignments.filter(a => new Date(a.due_at) <= today);
 
-  //Step 2: Filter to only assignments that are due
-  const today = new Date();
-  const dueAssignments = ag.assignments.filter(a => new Date(a.due_at) <= today);
-
-//     the ID of the learner for which this data has been collected
-//     "id": number,
-  //Step 3: Group submissions by learner_id
-  const learners = {};
-  for (const sub of submissions) {
-    if (!learners[sub.learner_id]) {
-      learners[sub.learner_id] = [];
-    }
-    learners[sub.learner_id].push(sub);
-  }
-}
+// //     the ID of the learner for which this data has been collected
+// //     "id": number,
+//   //Step 3: Group submissions by learner_id
+//   const learners = {};
+//   for (const sub of submissions) {
+//     if (!learners[sub.learner_id]) {
+//       learners[sub.learner_id] = [];
+//     }
+//     learners[sub.learner_id].push(sub);
+//   }
+// }
 
 
 
