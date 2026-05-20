@@ -1,6 +1,6 @@
-`SBA 308: JavaScript Fundamentals`
+#### SBA 308: JavaScript Fundamentals
 
-Version 1.1, 10/13/23
+**Version 1.1, 10/13/23**
 
 [Click here to open in a separate window.](https://www.canva.com/design/DAFxJzEGlWs/OxnBpoTDbneAidu7eN9WLw/edit?utm_content=DAFxJzEGlWs&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
