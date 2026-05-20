@@ -116,6 +116,10 @@ const LearnerSubmissions = [
 
 // function getLearnerData(course, ag, submissions) {
   // here, we would process this data to achieve the desired result.
+
+  //Figure out how many learner there are (and how many report objects are needed)
+
+
   const result = [
     {
       id: 125,
@@ -139,9 +143,14 @@ const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
 console.log(result);
 
 //===============INITIAL PHASE=======================//
+//So we're basically compressing all 3 objects, analyzing them, and coming up with a report object for each learner.
 // /* If an AssignmentGroup does not belong to its course (mismatching course_id), your program 
 // should throw an error, letting the user know that the input was invalid. Similar data validation
 // should occur elsewhere within the program.
+
+//Foundation: Let's figure out how many objects need to be in a result array based 
+// the amount of off of Learner arrays.
+
 
 //Step 1: Validate the input data
 function getLearnerData(course, ag, submissions) {
@@ -170,5 +179,8 @@ function getLearnerData(course, ag, submissions) {
 
 //     // the learner’s total, weighted average, in which assignments
 //     // with more points_possible should be counted for more
+
+
 //     // e.g. a learner with 50/100 on one assignment and 190/200 on another
 //     // would have a weighted average score of 240/300 = 80%.
+//===============For weighted Average score (Thanks Quinn)=================
