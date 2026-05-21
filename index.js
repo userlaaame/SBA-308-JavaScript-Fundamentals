@@ -111,7 +111,11 @@ const LearnerSubmissions = [
       submitted_at: "2023-03-07",
       score: 140
     }
+  },
+  {
+    learner_id: 150 //test run for new learners
   }
+  
 ];
 
 function getLearnerData(course, ag, submissions) {
@@ -123,31 +127,50 @@ function getLearnerData(course, ag, submissions) {
     // the amount of off of Learner arrays.
 
     //array of learner reports
-    const result = []
+    // const result = []
 
-    // keep track of learner ids'
-    const ids = []
+    // // keep track of learner ids'
+    // const ids = []
 
+    // for (let sub of submissions) {
+    //     // checks for the learner id in the array(specifically index)
+    //     if (ids.includes(sub.learner_id) !== true) {
+    //         ids.push(sub.learner_id);
+    //     }
+    //     //now we can create learner reports
+
+    //     //we need a way to check if the number is already in the array
+
+    //     //2. Create the learner objects, use a for of loop
+    //     for (let learnerId of ids) {
+    //         let learnerReport = {
+    //             id: learnerId
+    //         }
+    //         result.push(learnerReport);
+    //     }//looked it up.. loop is nested inside the submissions loop, so it runs and pushes 
+        // reports on every single submission iteration
+
+    const result = [];
+    const ids = [];
+    // First pass: collect unique learner IDs
     for (let sub of submissions) {
-        // checks for the learner id in the array(specifically index)
         if (ids.includes(sub.learner_id) !== true) {
             ids.push(sub.learner_id);
         }
-        //now we can create learner reports
+    }
 
-        //we need a way to check if the number is already in the array
+    // Second pass: create one report object per learner
+    for (let learnerId of ids) {
+        let learnerReport = { id: learnerId };
+        result.push(learnerReport);
+    }
 
-        //2. Create the learner objects, use a for of loop
-        for (let learnerId of ids) {
-            let learnerReport = {
-                id: learnerId
-            }
-            result.push(learnerReport);
-        }
+    console.log(result);
 
+    return result;
+}
 
-        console.log(ids);
-    }//i'm getting multiples printing again....need to fix
+//i'm getting multiples printing again....need to fix
 //   const result = [
 //     {
 //       id: 125,
@@ -162,9 +185,6 @@ function getLearnerData(course, ag, submissions) {
 //       2: 0.833 // late: (140 - 15) / 150
 //     }
 //   ];
-
-  return result;
-}
 
 const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
 
