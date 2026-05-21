@@ -120,104 +120,56 @@ const LearnerSubmissions = [
 
 function getLearnerData(course, ag, submissions) {
   // here, we would process this data to achieve the desired result.
+  //So we're basically compressing all 3 objects, analyzing them, and coming up with a 
+  // report object for each learner.
 
-  //Figure out how many learner there are (and how many report objects are needed)
-
-    //Foundation: Let's figure out how many objects need to be in a result array based 
-    // the amount of off of Learner arrays.
-
-    //array of learner reports
-    // const result = []
-
-    // // keep track of learner ids'
-    // const ids = []
-
-    // for (let sub of submissions) {
-    //     // checks for the learner id in the array(specifically index)
-    //     if (ids.includes(sub.learner_id) !== true) {
-    //         ids.push(sub.learner_id);
-    //     }
-    //     //now we can create learner reports
-
-    //     //we need a way to check if the number is already in the array
-
-    //     //2. Create the learner objects, use a for of loop
-    //     for (let learnerId of ids) {
-    //         let learnerReport = {
-    //             id: learnerId
-    //         }
-    //         result.push(learnerReport);
-    //     }//looked it up.. loop is nested inside the submissions loop, so it runs and pushes 
-        // reports on every single submission iteration
-
-    const result = [];
-    const ids = [];
-    // First pass: collect unique learner IDs
-    for (let sub of submissions) {
-        if (ids.includes(sub.learner_id) !== true) {
-            ids.push(sub.learner_id);
-        }
+  // Step 1: Validate — AssignmentGroup must belong to the course
+  try {
+    if (ag.course_id !== course.id) {
+      throw new Error(`AssignmentGroup ${ag.id} does not belong to course ${course.id}`);
     }
+  } catch (e) {
+    console.error(e.message);
+    return [];
+  }//if the course_id doesn't match, it throws and 
+  //catches the error, logs it, and returns an empty array
 
-    // Second pass: create one report object per learner
-    for (let learnerId of ids) {
-        let learnerReport = { id: learnerId };
-        result.push(learnerReport);
-    }
+  // Step 2: Filter to only assignments that are due
+  const today = new Date();
+  const dueAssignments = ag.assignments.filter(a => new Date(a.due_at) <= today);
 
-    console.log(result);
+  //Figure out how many learners there are (and how many report objects are needed)
 
-    return result;
+  //Foundation: Let's figure out how many objects need to be in a result array based
+  // the amount of Learner arrays.
+
+  //array of learner reports
+  const result = [];
+
+  // keep track of learner ids'
+  const ids = [];
+
+  // First pass: collect unique learner IDs
+  for (let sub of submissions) {
+      if (ids.includes(sub.learner_id) !== true) {
+          ids.push(sub.learner_id);
+      }
+  }
+
+  // Second pass: create one report object per learner
+  for (let learnerId of ids) {
+      let learnerReport = { id: learnerId };
+      result.push(learnerReport);
+  }
+
+  console.log(result);
+
+  return result;
 }
-
-//i'm getting multiples printing again....need to fix
-//   const result = [
-//     {
-//       id: 125,
-//       avg: 0.985, // (47 + 150) / (50 + 150)
-//       1: 0.94, // 47 / 50
-//       2: 1.0 // 150 / 150
-//     },
-//     {
-//       id: 132,
-//       avg: 0.82, // (39 + 125) / (50 + 150)
-//       1: 0.78, // 39 / 50
-//       2: 0.833 // late: (140 - 15) / 150
-//     }
-//   ];
 
 const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
 
 console.log(result);
-
-//===============INITIAL PHASE=======================//
-//So we're basically compressing all 3 objects, analyzing them, and coming up with a report object for each learner.
-// /* If an AssignmentGroup does not belong to its course (mismatching course_id), your program 
-// should throw an error, letting the user know that the input was invalid. Similar data validation
-// should occur elsewhere within the program.
-
-
-// //Step 1: Validate the input data
-// function getLearnerData(course, ag, submissions) {
-//   if (ag.course_id !== course.id) {
-//     throw new Error(`AssignmentGroup ${ag.id} does not belong to course ${course.id}`);
-//   }
-
-//   //Step 2: Filter to only assignments that are due
-//   const today = new Date();
-//   const dueAssignments = ag.assignments.filter(a => new Date(a.due_at) <= today);
-
-// //     the ID of the learner for which this data has been collected
-// //     "id": number,
-//   //Step 3: Group submissions by learner_id
-//   const learners = {};
-//   for (const sub of submissions) {
-//     if (!learners[sub.learner_id]) {
-//       learners[sub.learner_id] = [];
-//     }
-//     learners[sub.learner_id].push(sub);
-//   }
-// }
 
 
 
