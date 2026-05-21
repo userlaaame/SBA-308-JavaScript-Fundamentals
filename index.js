@@ -171,9 +171,16 @@ function getLearnerData(course, ag, submissions) {
 
         for (let i = 0; i < submissions.length; i++) {//this will go over the submissions
             if (learnerId === submissions[i].learner_id) {//this compares learner id's
-                console.log("Submission score: "+submissions[i].submission.score)
+                console.log("Submission score: " + submissions[i].submission.score)
                 score += submissions[i].submission.score //Good work Quinn!
-                console.log("Points possible: "+ag.assignments[0].points_possible)
+
+
+                for (let j = 0; j < ag.assignments.length; j++) {
+                    if (ag.assignments[j].id == submissions[i].assignment_id) { //added a compare value for assignments id and submissions id
+                        // console.log("They Match!")
+                        console.log("Points possible: " + ag.assignments[j].points_possible)
+                    }
+                }
             }
         }
         console.log("total score: " + score)
