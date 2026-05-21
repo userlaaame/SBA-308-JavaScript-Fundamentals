@@ -158,7 +158,7 @@ function getLearnerData(course, ag, submissions) {
 
   // Second pass: create one report object per learner
   for (let learnerId of ids) {
-      console.log(learnerId)
+      console.log("Learner id: "+learnerId)
       //   for(every value in Submissions) {
       // does the learner id match?
       // }    yes:
@@ -171,9 +171,12 @@ function getLearnerData(course, ag, submissions) {
 
       for(let i = 0; i < submissions.length; i++){//this will go over the submissions
         if (learnerId === submissions[i].learner_id) {//this compares learner id's
-            console.log(submissions[0].submission.score+" Score") //Good work Quinn!
+            console.log(submissions[i].submission.score)
+            score += submissions[i].submission.score //Good work Quinn!
         }
       }
+        console.log("total score: "+score)
+
       let learnerReport = { id: learnerId };
       
       console.log(learnerReport)
