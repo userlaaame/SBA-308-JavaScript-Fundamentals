@@ -158,7 +158,25 @@ function getLearnerData(course, ag, submissions) {
 
   // Second pass: create one report object per learner
   for (let learnerId of ids) {
+      console.log(learnerId)
+      //   for(every value in Submissions) {
+      // does the learner id match?
+      // }    yes:
+      // add to the object
+      //     no:
+      //     skip
+      //   }
+    //Need a variable to store totals
+    let score = 0
+
+      for(let i = 0; i < submissions.length; i++){//this will go over the submissions
+        if (learnerId === submissions[i].learner_id) {//this compares learner id's
+            console.log(submissions[0].submission.score+" Score") //Good work Quinn!
+        }
+      }
       let learnerReport = { id: learnerId };
+      
+      console.log(learnerReport)
       result.push(learnerReport);
   }
 
@@ -180,4 +198,3 @@ console.log(result);
 
 //     // e.g. a learner with 50/100 on one assignment and 190/200 on another
 //     // would have a weighted average score of 240/300 = 80%.
-//===============For weighted Average score (Thanks Quinn)=================
